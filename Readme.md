@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Renko Hens](https://up.htmlacademy.ru/ecmascript/11/user/525315).
-* Наставник: `Неизвестно`.
+* Наставник: [Борис Лобанов](https://htmlacademy.ru/profile/boris_lobanov).
 
 ---
 
