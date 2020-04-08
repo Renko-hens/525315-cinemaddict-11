@@ -3,7 +3,6 @@ import {createNavigationMenuTemplate} from './components/navigationMenu';
 import {createFiltersTemplate} from './components/filters';
 import {createFilmListsTemplate} from './components/filmList';
 import {createFilmStatistics} from './components/filmStatistics';
-import {createDetailedFilmTemplate} from './components/detailtedFilm';
 
 const header = document.querySelector(`.header`);
 const main = document.querySelector(`.main`);
@@ -19,4 +18,3 @@ renderElement(main, createNavigationMenuTemplate());
 renderElement(main, createFiltersTemplate());
 renderElement(main, createFilmListsTemplate());
 renderElement(footerStatistics, createFilmStatistics());
-renderElement(main, createDetailedFilmTemplate());
