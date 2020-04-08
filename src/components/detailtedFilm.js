@@ -173,4 +173,4 @@ const createDetailedFilmTemplate = () => {
   `);
 };
 
-export default createDetailedFilmTemplate;
+export {createDetailedFilmTemplate};

@@ -1,5 +1,5 @@
-import createFilmCardTemplate from './filmCard';
-import createShowButtonTemplate from './showButton';
+import {createFilmCardTemplate} from './filmCard';
+import {createShowButtonTemplate} from './showButton';
 
 const DEFAULT_COUNT = 5;
 
@@ -38,4 +38,4 @@ const createFilmListsTemplate = () => {
   `);
 };
 
-export default createFilmListsTemplate;
+export {createFilmListsTemplate};

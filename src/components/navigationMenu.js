@@ -12,4 +12,4 @@ const createNavigationMenuTemplate = () => {
   `);
 };
 
-export default createNavigationMenuTemplate;
+export {createNavigationMenuTemplate};

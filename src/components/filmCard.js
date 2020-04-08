@@ -20,4 +20,4 @@ const createFilmCardTemplate = () => {
   `);
 };
 
-export default createFilmCardTemplate;
+export {createFilmCardTemplate};

@@ -7,4 +7,4 @@ const createHeaderProfileTemplate = () => {
   `);
 };
 
-export default createHeaderProfileTemplate;
+export {createHeaderProfileTemplate};

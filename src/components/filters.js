@@ -8,4 +8,4 @@ const createFiltersTemplate = () => {
   `);
 };
 
-export default createFiltersTemplate;
+export {createFiltersTemplate};

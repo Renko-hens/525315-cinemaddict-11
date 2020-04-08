@@ -4,4 +4,4 @@ const createFilmStatistics = () => {
   `);
 };
 
-export default createFilmStatistics;
+export {createFilmStatistics};

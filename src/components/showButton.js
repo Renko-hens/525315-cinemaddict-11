@@ -4,4 +4,4 @@ const createShowButtonTemplate = () => {
   `);
 };
 
-export default createShowButtonTemplate;
+export {createShowButtonTemplate};
