@@ -1,8 +1,14 @@
-import {createHeaderProfileTemplate} from './components/headerProfile';
-import {createNavigationMenuTemplate} from './components/navigationMenu';
-import {createFiltersTemplate} from './components/filters';
-import {createFilmListsTemplate} from './components/filmList';
-import {createFilmStatistics} from './components/filmStatistics';
+import {createHeaderProfileTemplate} from './components/header-profile';
+import {createNavigationMenuTemplate} from './components/navigation-menu';
+import {createSortsTemplate} from './components/sorts';
+import {createFilmListsTemplate} from './components/films';
+import {createFilmStatistics} from './components/statistics-film';
+
+import {generateFilters} from './mock/filter';
+import {sorts} from './mock/sort';
+import {generateCardsFilm} from './mock/card-film';
+
+const CARD_COUNT = 5;
 
 const header = document.querySelector(`.header`);
 const main = document.querySelector(`.main`);
@@ -14,7 +20,10 @@ const renderElement = (container, template, position = `beforeend`) => {
 };
 
 renderElement(header, createHeaderProfileTemplate());
-renderElement(main, createNavigationMenuTemplate());
-renderElement(main, createFiltersTemplate());
-renderElement(main, createFilmListsTemplate());
+
+const filters = generateFilters();
+renderElement(main, createNavigationMenuTemplate(filters));
+renderElement(main, createSortsTemplate(sorts));
+const cards = generateCardsFilm(CARD_COUNT);
+renderElement(main, createFilmListsTemplate(cards));
 renderElement(footerStatistics, createFilmStatistics());
