@@ -1,6 +1,6 @@
 const createCardFilmTemplate = (film) => {
   // YEAR и DURATION это даты? как с ними работать?
-  const {title, rating, year, duration, genre, poster, description, comments, isWatchlist, isWatched, isFavorite} = film;
+  const {title, rating, year, duration, genres, poster, description, comments, isWatchlist, isWatched, isFavorite} = film;
 
   const watchlistButtonActiveClass = isWatchlist ? `film-card__controls-item--active` : ``;
   const watchedButtonActiveClass = isWatched ? `film-card__controls-item--active` : ``;
@@ -13,7 +13,7 @@ const createCardFilmTemplate = (film) => {
       <p class="film-card__info">
         <span class="film-card__year">${year}</span>
         <span class="film-card__duration">${duration}</span>
-        <span class="film-card__genre">${genre}</span>
+        ${genres.length === 1 ? `<span class="film-card__genre">${genres}</span>` : `<span class="film-card__genres">${genres.join(`, `)}</span>`}
       </p>
       <img src="${poster}" alt="" class="film-card__poster">
       <p class="film-card__description">${description}</p>

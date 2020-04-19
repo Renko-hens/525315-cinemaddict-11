@@ -1,6 +1,6 @@
-const createFilmStatistics = () => {
+const createFilmStatistics = (quanity) => {
   return (`
-    <p>0 movies inside</p>
+    <p>${quanity} movies inside</p>
   `);
 };
 
