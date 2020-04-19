@@ -1,14 +1,13 @@
-
+import {createCommentsTemplate} from './comments';
+import {formatTime, formatYear} from '../utils';
 
 const createDetailedFilmTemplate = (film) => {
-  const {age, title, originalTitle, rating, director, writers, actors, year, duration, country, genres, poster, description, comments, isWatchlist, isWatched, isFavorite} = film;
+  const {age, title, originalTitle, rating, director, writers, actors, year, duration, country, genres, poster, description, commentsArray} = film;
 
-  const watchlistButtonActiveClass = isWatchlist ? `film-card__controls-item--active` : ``;
-  const watchedButtonActiveClass = isWatched ? `film-card__controls-item--active` : ``;
-  const favoriteButtonActiveClass = isFavorite ? `film-card__controls-item--active` : ``;
+  const commentMarkup = createCommentsTemplate(commentsArray);
 
   return (`
-    <section class="film-details">
+    <section class="film-details visually-hidden">
       <form class="film-details__inner" action="" method="get">
         <div class="form-details__top-container">
           <div class="film-details__close">
@@ -48,11 +47,11 @@ const createDetailedFilmTemplate = (film) => {
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Release Date</td>
-                  <td class="film-details__cell">${year}</td>
+                  <td class="film-details__cell">${formatYear(year)}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Runtime</td>
-                  <td class="film-details__cell">${duration}</td>
+                  <td class="film-details__cell">${formatTime(duration, `hours`)}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Country</td>
@@ -61,7 +60,7 @@ const createDetailedFilmTemplate = (film) => {
                 <tr class="film-details__row">
                   <td class="film-details__term">Genre</td>
                   <td class="film-details__cell">
-                    ${genres.length === 1 ? `<span class="film-details__genre">${genres}</span>` : `<span class="film-details__genres">${genres.join(`, `)}</span>`}
+                    ${genres.length === 1 ? `<span class="film-details__genre">${genres}</span>` : `<span class="film-details__genres">${genres.join(` `)}</span>`}
                   </td>
                 </tr>
               </tbody></table>
@@ -74,105 +73,18 @@ const createDetailedFilmTemplate = (film) => {
 
           <section class="film-details__controls">
             <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist">
-            <label for="watchlist" class="film-details__control-label ${watchlistButtonActiveClass}">Add to watchlist</label>
+            <label for="watchlist" class="film-details__control-label film-details__control-label--watchlist">Add to watchlist</label>
 
             <input type="checkbox" class="film-details__control-input visually-hidden" id="watched" name="watched">
-            <label for="watched" class="film-details__control-label ${watchedButtonActiveClass}">Already watched</label>
+            <label for="watched" class="film-details__control-label film-details__control-label--watched">Already watched</label>
 
             <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite">
-            <label for="favorite" class="film-details__control-label ${favoriteButtonActiveClass}">Add to favorites</label>
+            <label for="favorite" class="film-details__control-label film-details__control-label--favorite">Add to favorites</label>
           </section>
         </div>
 
         <div class="form-details__bottom-container">
-          <section class="film-details__comments-wrap">
-            <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">4</span></h3>
-
-            <ul class="film-details__comments-list">
-              <li class="film-details__comment">
-                <span class="film-details__comment-emoji">
-                  <img src="./images/emoji/smile.png" alt="emoji-smile" width="55" height="55">
-                </span>
-                <div>
-                  <p class="film-details__comment-text">Interesting setting and a good cast</p>
-                  <p class="film-details__comment-info">
-                    <span class="film-details__comment-author">Tim Macoveev</span>
-                    <span class="film-details__comment-day">2019/12/31 23:59</span>
-                    <button class="film-details__comment-delete">Delete</button>
-                  </p>
-                </div>
-              </li>
-              <li class="film-details__comment">
-                <span class="film-details__comment-emoji">
-                  <img src="./images/emoji/sleeping.png" alt="emoji-sleeping" width="55" height="55">
-                </span>
-                <div>
-                  <p class="film-details__comment-text">Booooooooooring</p>
-                  <p class="film-details__comment-info">
-                    <span class="film-details__comment-author">John Doe</span>
-                    <span class="film-details__comment-day">2 days ago</span>
-                    <button class="film-details__comment-delete">Delete</button>
-                  </p>
-                </div>
-              </li>
-              <li class="film-details__comment">
-                <span class="film-details__comment-emoji">
-                  <img src="./images/emoji/puke.png" alt="emoji-puke" width="55" height="55">
-                </span>
-                <div>
-                  <p class="film-details__comment-text">Very very old. Meh</p>
-                  <p class="film-details__comment-info">
-                    <span class="film-details__comment-author">John Doe</span>
-                    <span class="film-details__comment-day">2 days ago</span>
-                    <button class="film-details__comment-delete">Delete</button>
-                  </p>
-                </div>
-              </li>
-              <li class="film-details__comment">
-                <span class="film-details__comment-emoji">
-                  <img src="./images/emoji/angry.png" alt="emoji-angry" width="55" height="55">
-                </span>
-                <div>
-                  <p class="film-details__comment-text">Almost two hours? Seriously?</p>
-                  <p class="film-details__comment-info">
-                    <span class="film-details__comment-author">John Doe</span>
-                    <span class="film-details__comment-day">Today</span>
-                    <button class="film-details__comment-delete">Delete</button>
-                  </p>
-                </div>
-              </li>
-            </ul>
-
-            <div class="film-details__new-comment">
-              <div for="add-emoji" class="film-details__add-emoji-label"></div>
-
-              <label class="film-details__comment-label">
-                <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
-              </label>
-
-              <div class="film-details__emoji-list">
-                <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-smile" value="smile">
-                <label class="film-details__emoji-label" for="emoji-smile">
-                  <img src="./images/emoji/smile.png" alt="emoji" width="30" height="30">
-                </label>
-
-                <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-sleeping" value="sleeping">
-                <label class="film-details__emoji-label" for="emoji-sleeping">
-                  <img src="./images/emoji/sleeping.png" alt="emoji" width="30" height="30">
-                </label>
-
-                <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-puke" value="puke">
-                <label class="film-details__emoji-label" for="emoji-puke">
-                  <img src="./images/emoji/puke.png" alt="emoji" width="30" height="30">
-                </label>
-
-                <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-angry" value="angry">
-                <label class="film-details__emoji-label" for="emoji-angry">
-                  <img src="./images/emoji/angry.png" alt="emoji" width="30" height="30">
-                </label>
-              </div>
-            </div>
-          </section>
+          ${commentMarkup}
         </div>
       </form>
     </section>
@@ -180,9 +92,8 @@ const createDetailedFilmTemplate = (film) => {
 };
 
 const createDetailtedCardsFilmTemplate = (cards) => {
-  // Как сделать чтобы по значению проходил сколько было задано? count = 2, значит выведет две карты
   return cards.map((it) => createDetailedFilmTemplate(it)).join(`\n`);
 };
 
 
-export {createDetailtedCardsFilmTemplate};
+export {createDetailtedCardsFilmTemplate, createDetailedFilmTemplate};

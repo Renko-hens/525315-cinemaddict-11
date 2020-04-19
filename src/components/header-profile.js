@@ -2,11 +2,11 @@ const createHeaderProfileTemplate = (ratingValue) => {
   let rating = ``;
 
   if (ratingValue > 0 && ratingValue < 11) {
-    rating = `novice`;
+    rating = `Novice`;
   } else if (ratingValue > 10 && ratingValue < 21) {
-    rating = `fan`;
+    rating = `Fan`;
   } else if (ratingValue > 21) {
-    rating = `movie buff`;
+    rating = `Movie buff`;
   }
 
   return (`

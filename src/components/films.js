@@ -1,13 +1,17 @@
 import {createCardsFilmTemplate} from './cards-film';
 import {createShowButtonTemplate} from './show-button';
 
-const createFilmListsTemplate = (cards) => {
-  // Правильно ли так?
-  const upcomingCardsMarkup = createCardsFilmTemplate(cards, 5);
-  const topCardsMarkup = createCardsFilmTemplate(cards);
-  const commentedCardsMarkup = createCardsFilmTemplate(cards);
+const SHOWING_FILM_COUNT_FOR_EXTRA = 2;
 
+const createFilmListsTemplate = (cards) => {
+  const upcomingCardsMarkup = createCardsFilmTemplate(cards);
   const showButton = createShowButtonTemplate();
+
+  const topCards = cards.slice(0, SHOWING_FILM_COUNT_FOR_EXTRA);
+  const commentedCards = cards.slice(0, SHOWING_FILM_COUNT_FOR_EXTRA);
+
+  const topCardsMarkup = createCardsFilmTemplate(topCards);
+  const commentedCardsMarkup = createCardsFilmTemplate(commentedCards);
 
   return (`
     <section class="films">
