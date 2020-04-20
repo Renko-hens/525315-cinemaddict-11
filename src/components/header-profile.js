@@ -3,9 +3,9 @@ const createHeaderProfileTemplate = (ratingValue) => {
 
   if (ratingValue > 0 && ratingValue < 11) {
     rating = `Novice`;
-  } else if (ratingValue > 10 && ratingValue < 21) {
+  } else if (ratingValue < 21) {
     rating = `Fan`;
-  } else if (ratingValue > 21) {
+  } else if (ratingValue >= 21) {
     rating = `Movie buff`;
   }
 

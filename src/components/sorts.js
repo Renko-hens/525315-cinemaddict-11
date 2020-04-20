@@ -1,6 +1,6 @@
 const createSortTemplate = (name, isActive) => {
   return (`
-    <li><a href="#" class="sort__button ${isActive ? `sort__button--active` : ``}">${name}</a></li>
+    <li><a href="#" class="sort__button ${isActive ? `sort__button--active` : ``}">Sort by ${name}</a></li>
   `);
 };
 

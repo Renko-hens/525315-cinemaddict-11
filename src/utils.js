@@ -27,25 +27,33 @@ const castTimeFormat = (value) => {
 };
 
 
-const formatTime = (date, type) => {
+const formatTime = (date, typeTime) => {
   const hours = castTimeFormat(date.getHours() % 12);
   const minutes = castTimeFormat(date.getMinutes());
-  return type === `full` ? `${hours}:${minutes}` : `${hours}h ${minutes}m`;
+  return typeTime === `letters` ? `${hours}h ${minutes}m` : `${hours}:${minutes}`;
 };
 
-
-const formatYear = (date, type) => {
+const formatYear = (date, typeYear, typeMonth = `string`) => {
   const day = date.getDate();
-  const month = type === `full` ? date.getMonth() : MONTH_NAMES[date.getMonth()];
+  const month = typeMonth === `string` ? MONTH_NAMES[date.getMonth()] : date.getMonth();
   const year = date.getFullYear();
-  return type === `full` ? `${year}/${month}/${day}` : `${day} ${month} ${year}`;
+
+  if (typeYear === `year`) {
+    return `${year}`;
+  } else if (typeYear === `divider`) {
+    return `${year}/${month}/${day}`;
+  } else if (typeYear === `normal`) {
+    return `${day} ${month} ${year}`;
+  }
 };
 
 
-const fullDate = (date) => {
-  const time = formatTime(date, `full`);
-  const year = formatYear(date, `full`);
+const formatDate = (date, typeTime, typeYear, typeMonth) => {
+  const time = formatTime(date, typeTime);
+  const year = formatYear(date, typeYear, typeMonth);
   return `${year} ${time}`;
 };
 
-export {getRandomIntegerNumber, getRandomArray, getRandomArrayItem, getRandomDate, formatTime, formatYear, fullDate};
+const getRandomBool = () => Math.random() > 0.5;
+
+export {getRandomIntegerNumber, getRandomArray, getRandomArrayItem, getRandomDate, formatTime, formatYear, formatDate, getRandomBool};

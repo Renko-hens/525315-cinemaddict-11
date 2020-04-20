@@ -46,7 +46,7 @@ const loadMoreButton = main.querySelector(`.films-list__show-more`);
 
 loadMoreButton.addEventListener(`click`, () => {
   const prevFilmsCount = showingFilmsCount;
-  showingFilmsCount = showingFilmsCount + SHOWING_FILM_COUNT_BY_BUTTON;
+  showingFilmsCount += SHOWING_FILM_COUNT_BY_BUTTON;
 
   cards.slice(prevFilmsCount, showingFilmsCount)
     .forEach((film) => {

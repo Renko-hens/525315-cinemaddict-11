@@ -1,4 +1,4 @@
-import {getRandomIntegerNumber, getRandomArray, getRandomArrayItem, getRandomDate} from '../utils';
+import {getRandomIntegerNumber, getRandomArray, getRandomArrayItem, getRandomDate, getRandomBool} from '../utils';
 import {generateComments} from './comment';
 
 const DEFAULT_COUNT = 2;
@@ -27,9 +27,9 @@ const generateCardFilm = () => {
     genres: getRandomArray(genres),
     description: getRandomArray(descriptions).join(` `),
     commentsArray: generateComments(),
-    isWatchlist: Math.random() > 0.5,
-    isWatched: Math.random() > 0.5,
-    isFavorite: Math.random() > 0.5,
+    isWatchlist: getRandomBool(),
+    isWatched: getRandomBool(),
+    isFavorite: getRandomBool(),
   };
 };
 

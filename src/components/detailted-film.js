@@ -47,11 +47,11 @@ const createDetailedFilmTemplate = (film) => {
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Release Date</td>
-                  <td class="film-details__cell">${formatYear(year)}</td>
+                  <td class="film-details__cell">${formatYear(year, `normal`, `string`)}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Runtime</td>
-                  <td class="film-details__cell">${formatTime(duration, `hours`)}</td>
+                  <td class="film-details__cell">${formatTime(duration, `letters`)}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Country</td>

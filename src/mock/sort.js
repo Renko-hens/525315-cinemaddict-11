@@ -1,3 +1,3 @@
-const sorts = [`Sort by default`, `Sort by date`, `Sort by rating`];
+const sorts = [`default`, `date`, `rating`];
 
 export {sorts};

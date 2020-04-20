@@ -10,8 +10,8 @@ const createCardFilmTemplate = (film) => {
       <h3 class="film-card__title">${title}</h3>
       <p class="film-card__rating">${rating}</p>
       <p class="film-card__info">
-        <span class="film-card__year">${formatYear(year)}</span>
-        <span class="film-card__duration">${formatTime(duration)}</span>
+        <span class="film-card__year">${formatYear(year, `year`)}</span>
+        <span class="film-card__duration">${formatTime(duration, `letters`)}</span>
         ${genres.length === 1 ? `<span class="film-card__genre">${genres}</span>` : `<span class="film-card__genres">${genres.join(`, `)}</span>`}
       </p>
       <img src="${poster}" alt="" class="film-card__poster">
@@ -27,7 +27,7 @@ const createCardFilmTemplate = (film) => {
 };
 
 const createCardsFilmTemplate = (cards) => {
-  const upcomingCardMarkup = cards.map((it) => createCardFilmTemplate(it)).join(`\n`);
+  const upcomingCardMarkup = cards.map((card) => createCardFilmTemplate(card)).join(`\n`);
 
   return (`
     <div class="films-list__container">
