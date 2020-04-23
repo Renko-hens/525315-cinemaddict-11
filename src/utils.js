@@ -33,7 +33,7 @@ const formatTime = (date, typeTime) => {
   return typeTime === `letters` ? `${hours}h ${minutes}m` : `${hours}:${minutes}`;
 };
 
-const formatYear = (date, typeYear, typeMonth = `string`) => {
+const formatDate = (date, typeYear, typeMonth = `string`) => {
   const day = date.getDate();
   const month = typeMonth === `string` ? MONTH_NAMES[date.getMonth()] : date.getMonth();
   const year = date.getFullYear();
@@ -48,12 +48,12 @@ const formatYear = (date, typeYear, typeMonth = `string`) => {
 };
 
 
-const formatDate = (date, typeTime, typeYear, typeMonth) => {
+const formatDateTime = (date, typeTime, typeYear, typeMonth) => {
   const time = formatTime(date, typeTime);
-  const year = formatYear(date, typeYear, typeMonth);
+  const year = formatDate(date, typeYear, typeMonth);
   return `${year} ${time}`;
 };
 
 const getRandomBool = () => Math.random() > 0.5;
 
-export {getRandomIntegerNumber, getRandomArray, getRandomArrayItem, getRandomDate, formatTime, formatYear, formatDate, getRandomBool};
+export {getRandomIntegerNumber, getRandomArray, getRandomArrayItem, getRandomDate, formatTime, formatDate, formatDateTime, getRandomBool};

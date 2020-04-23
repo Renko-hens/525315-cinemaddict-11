@@ -1,4 +1,4 @@
-import {formatDate} from '../utils';
+import {formatDateTime} from '../utils';
 
 const createCommentTemplate = (comment) => {
   const {textComment, emoji, author, data} = comment;
@@ -11,7 +11,7 @@ const createCommentTemplate = (comment) => {
       <p class="film-details__comment-text">${textComment}</p>
       <p class="film-details__comment-info">
         <span class="film-details__comment-author">${author}</span>
-        <span class="film-details__comment-day">${formatDate(data, `number`, `divider`, `number`)}</span>
+        <span class="film-details__comment-day">${formatDateTime(data, `number`, `divider`, `number`)}</span>
         <button class="film-details__comment-delete">Delete</button>
       </p>
     </div>

@@ -1,5 +1,5 @@
 import {createCommentsTemplate} from './comments';
-import {formatTime, formatYear} from '../utils';
+import {formatTime, formatDate} from '../utils';
 
 const createDetailedFilmTemplate = (film) => {
   const {age, title, originalTitle, rating, director, writers, actors, year, duration, country, genres, poster, description, commentsArray} = film;
@@ -47,7 +47,7 @@ const createDetailedFilmTemplate = (film) => {
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Release Date</td>
-                  <td class="film-details__cell">${formatYear(year, `normal`, `string`)}</td>
+                  <td class="film-details__cell">${formatDate(year, `normal`, `string`)}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Runtime</td>
