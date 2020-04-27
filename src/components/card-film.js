@@ -1,12 +1,12 @@
-import {formatTime, formatDate} from '../utils';
+import {formatTime, formatDate, createElement} from '../utils';
 
-const createCardFilmTemplate = (film) => {
-  const {title, rating, year, duration, genres, poster, description, commentsArray, isWatchlist, isWatched, isFavorite} = film;
+const createCardFilmTemplate = (card) => {
+  const {title, rating, year, duration, genres, poster, description, commentsArray, isWatchlist, isWatched, isFavorite} = card;
   const watchlistButtonActiveClass = isWatchlist ? `film-card__controls-item--active` : ``;
   const watchedButtonActiveClass = isWatched ? `film-card__controls-item--active` : ``;
   const favoriteButtonActiveClass = isFavorite ? `film-card__controls-item--active` : ``;
-  return (`
-    <article class="film-card">
+  return (
+    `<article class="film-card">
       <h3 class="film-card__title">${title}</h3>
       <p class="film-card__rating">${rating}</p>
       <p class="film-card__info">
@@ -22,19 +22,28 @@ const createCardFilmTemplate = (film) => {
         <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${watchedButtonActiveClass}">Mark as watched</button>
         <button class="film-card__controls-item button film-card__controls-item--favorite ${favoriteButtonActiveClass}">Mark as favorite</button>
       </form>
-    </article>
-  `);
+    </article>`);
 };
 
-const createCardsFilmTemplate = (cards) => {
-  const upcomingCardMarkup = cards.map((card) => createCardFilmTemplate(card)).join(`\n`);
+export default class Card {
+  constructor(card) {
+    this._card = card;
+    this._element = null;
+  }
 
-  return (`
-    <div class="films-list__container">
-      ${upcomingCardMarkup}
-    </div>
-  `);
-};
+  getTemplate() {
+    return createCardFilmTemplate(this._card);
+  }
 
-// Остановился на 02:40:00
-export {createCardsFilmTemplate, createCardFilmTemplate};
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

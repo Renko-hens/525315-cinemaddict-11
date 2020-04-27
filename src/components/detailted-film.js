@@ -1,13 +1,13 @@
 import {createCommentsTemplate} from './comments';
-import {formatTime, formatDate} from '../utils';
+import {formatTime, formatDate, createElement} from '../utils';
 
 const createDetailedFilmTemplate = (film) => {
   const {age, title, originalTitle, rating, director, writers, actors, year, duration, country, genres, poster, description, commentsArray} = film;
 
   const commentMarkup = createCommentsTemplate(commentsArray);
 
-  return (`
-    <section class="film-details visually-hidden">
+  return (
+    `<section class="film-details visually-hidden">
       <form class="film-details__inner" action="" method="get">
         <div class="form-details__top-container">
           <div class="film-details__close">
@@ -87,13 +87,32 @@ const createDetailedFilmTemplate = (film) => {
           ${commentMarkup}
         </div>
       </form>
-    </section>
-  `);
+    </section>`);
 };
 
 const createDetailtedCardsFilmTemplate = (cards) => {
   return cards.map((it) => createDetailedFilmTemplate(it)).join(`\n`);
 };
 
+export default class DetaltedCards {
+  constructor(card) {
+    this._card = card;
+    this._elements = null;
+  }
 
-export {createDetailtedCardsFilmTemplate, createDetailedFilmTemplate};
+  getTemplate() {
+    return createDetailtedCardsFilmTemplate(this._card);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
