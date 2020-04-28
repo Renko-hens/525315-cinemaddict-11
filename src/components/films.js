@@ -1,20 +1,6 @@
-// import {createCardsFilmTemplate} from './cards';
-// import {createShowButtonTemplate} from './show-button';
 import {createElement} from '../utils';
 
-
-
-// cards <--- БЫЛО ПАРАМЕТРОМ
 const createFilmListsTemplate = () => {
-  // const upcomingCardsMarkup = createCardsFilmTemplate(cards);
-  // const showButton = createShowButtonTemplate();
-
-  // const topCards = cards.slice(0, SHOWING_FILM_COUNT_FOR_EXTRA);
-  // const commentedCards = cards.slice(0, SHOWING_FILM_COUNT_FOR_EXTRA);
-
-  // const topCardsMarkup = createCardsFilmTemplate(topCards);
-  // const commentedCardsMarkup = createCardsFilmTemplate(commentedCards);
-
   return (
     `<section class="films">
       <section class="films-list">
