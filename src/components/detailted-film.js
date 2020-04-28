@@ -7,7 +7,7 @@ const createDetailedFilmTemplate = (film) => {
   const commentMarkup = createCommentsTemplate(commentsArray);
 
   return (
-    `<section class="film-details visually-hidden">
+    `<section class="film-details">
       <form class="film-details__inner" action="" method="get">
         <div class="form-details__top-container">
           <div class="film-details__close">
@@ -90,18 +90,18 @@ const createDetailedFilmTemplate = (film) => {
     </section>`);
 };
 
-const createDetailtedCardsFilmTemplate = (cards) => {
-  return cards.map((it) => createDetailedFilmTemplate(it)).join(`\n`);
-};
+// const createDetailtedCardsFilmTemplate = (cards) => {
+//   return cards.map((it) => createDetailedFilmTemplate(it)).join(`\n`);
+// };
 
-export default class DetaltedCards {
+export default class DetaltedCard {
   constructor(card) {
     this._card = card;
     this._elements = null;
   }
 
   getTemplate() {
-    return createDetailtedCardsFilmTemplate(this._card);
+    return createDetailedFilmTemplate(this._card);
   }
 
   getElement() {
