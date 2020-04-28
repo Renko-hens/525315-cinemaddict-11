@@ -41,17 +41,24 @@ export const formatTime = (date, typeTime) => {
 
 
 export const formatDate = (date, typeYear, typeMonth = `string`) => {
+  const dateFormat = ``;
   const day = date.getDate();
   const month = typeMonth === `string` ? MONTH_NAMES[date.getMonth()] : date.getMonth();
   const year = date.getFullYear();
 
-  if (typeYear === `year`) {
-    return `${year}`;
-  } else if (typeYear === `divider`) {
-    return `${year}/${month}/${day}`;
-  } else if (typeYear === `normal`) {
-    return `${day} ${month} ${year}`;
+  switch (typeYear) {
+    case `year`:
+      dateFormat = `${year}`;
+      break;
+    case `divider`:
+      dateFormat = `${year}/${month}/${day}`;
+      break;
+    case `normal`:
+      dateFormat = `${day} ${month} ${year}`;
+      break;
   }
+
+  return dateFormat;
 };
 
 
