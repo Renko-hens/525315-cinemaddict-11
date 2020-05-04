@@ -12,7 +12,7 @@ export default class Statistics {
 
   getTemplate() {
     return createFilmStatistics(this.quantity);
-  }
+   }
 
   getElement() {
     if (!this._element) {
