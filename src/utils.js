@@ -41,7 +41,7 @@ export const formatTime = (date, typeTime) => {
 
 
 export const formatDate = (date, typeYear, typeMonth = `string`) => {
-  const dateFormat = ``;
+  let dateFormat = ``;
   const day = date.getDate();
   const month = typeMonth === `string` ? MONTH_NAMES[date.getMonth()] : date.getMonth();
   const year = date.getFullYear();

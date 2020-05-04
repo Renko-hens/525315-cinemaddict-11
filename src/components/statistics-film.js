@@ -1,17 +1,17 @@
 import {createElement} from '../utils';
 
-const createFilmStatistics = (quanity) => {
-  return (`<p>${quanity} movies inside</p>`);
+const createFilmStatistics = (quantity) => {
+  return (`<p>${quantity} movies inside</p>`);
 };
 
 export default class Statistics {
-  constructor(quanity) {
-    this._quanity = quanity;
+  constructor(quantity) {
+    this._quantity = quantity;
     this._element = null;
   }
 
   getTemplate() {
-    return createFilmStatistics(this._quanity);
+    return createFilmStatistics(this.quantity);
   }
 
   getElement() {

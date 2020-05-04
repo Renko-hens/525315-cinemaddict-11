@@ -17,7 +17,7 @@ import {generateCardsFilm} from './mock/card-film';
 
 
 const CARD_COUNT = 20;
-const QUANITY_MOVIES = Math.floor(Math.random() * 100);
+const QUANTITY_MOVIES = Math.floor(Math.random() * 100);
 const SHOWING_FILM_COUNT_ON_START = 5;
 const SHOWING_FILM_COUNT_BY_BUTTON = 5;
 const SHOWING_FILM_COUNT_FOR_EXTRA = 2;
@@ -157,5 +157,5 @@ render(main, boardFilmsComponent.getElement());
 const cards = generateCardsFilm(CARD_COUNT);
 renderBoard(boardFilmsComponent, cards);
 
-const statisticsComponent = new StatisticsComponent(QUANITY_MOVIES);
+const statisticsComponent = new StatisticsComponent(QUANTITY_MOVIES);
 render(footerStatistics, statisticsComponent.getElement());
