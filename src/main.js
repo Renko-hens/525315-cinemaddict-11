@@ -157,5 +157,6 @@ render(main, boardFilmsComponent.getElement());
 const cards = generateCardsFilm(CARD_COUNT);
 renderBoard(boardFilmsComponent, cards);
 
+console.log(QUANTITY_MOVIES);
 const statisticsComponent = new StatisticsComponent(QUANTITY_MOVIES);
 render(footerStatistics, statisticsComponent.getElement());

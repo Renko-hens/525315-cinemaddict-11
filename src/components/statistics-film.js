@@ -11,7 +11,7 @@ export default class Statistics {
   }
 
   getTemplate() {
-    return createFilmStatistics(this.quantity);
+    return createFilmStatistics(this._quantity);
   }
 
   getElement() {
