@@ -90,10 +90,6 @@ const createDetailedFilmTemplate = (film) => {
     </section>`);
 };
 
-// const createDetailtedCardsFilmTemplate = (cards) => {
-//   return cards.map((it) => createDetailedFilmTemplate(it)).join(`\n`);
-// };
-
 export default class DetaltedCard {
   constructor(card) {
     this._card = card;
