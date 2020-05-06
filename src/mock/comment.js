@@ -1,4 +1,4 @@
-import {getRandomArrayItem, getRandomDate, getRandomIntegerNumber} from '../utils';
+import {getRandomArrayItem, getRandomDate, getRandomIntegerNumber} from '../utils/common';
 import {COMMENTS_NAMES, EMOJIES, TEXT_COMMENT} from '../const';
 
 const generateComments = (count = getRandomIntegerNumber(0, COMMENTS_NAMES.length)) => {

@@ -1,4 +1,4 @@
-import {createElement} from "../utils";
+import AbstractComponent from "./abstract-component";
 
 const createFilterTemplate = (filter, isActive) => {
   const {name, count, id} = filter;
@@ -22,25 +22,13 @@ const createNavigationMenuTemplate = (filters) => {
     </nav>`);
 };
 
-export default class NavigationMenu {
+export default class NavigationMenu extends AbstractComponent {
   constructor(filters) {
+    super();
     this._filters = filters;
-    this._element = null;
   }
 
   getTemplate() {
     return createNavigationMenuTemplate(this._filters);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

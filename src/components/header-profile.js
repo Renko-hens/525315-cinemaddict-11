@@ -1,4 +1,4 @@
-import {createElement} from "../utils";
+import AbstractComponent from "./abstract-component";
 
 const createHeaderProfileTemplate = (ratingValue) => {
   let rating = ``;
@@ -18,25 +18,13 @@ const createHeaderProfileTemplate = (ratingValue) => {
     </section>`);
 };
 
-export default class Rating {
+export default class Rating extends AbstractComponent {
   constructor(ratingValue) {
+    super();
     this._rating = ratingValue;
-    this._element = null;
   }
 
   getTemplate() {
     return createHeaderProfileTemplate(this._rating);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

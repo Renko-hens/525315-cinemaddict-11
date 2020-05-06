@@ -1,4 +1,4 @@
-import {getRandomIntegerNumber, getRandomArray, getRandomArrayItem, getRandomDate, getRandomBool} from '../utils';
+import {getRandomIntegerNumber, getRandomArray, getRandomArrayItem, getRandomDate, getRandomBool} from '../utils/common';
 import {generateComments} from './comment';
 
 const DEFAULT_COUNT = 2;

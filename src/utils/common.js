@@ -1,14 +1,7 @@
-import {MONTH_NAMES} from './const';
-
+import {MONTH_NAMES} from '../const';
 
 const castTimeFormat = (value) => {
   return value < 10 ? `0${value}` : String(value);
-};
-
-
-export const RenderPosition = {
-  AFTERBEGIN: `afterbegin`,
-  BEFOREEND: `beforeend`
 };
 
 
@@ -70,24 +63,3 @@ export const formatDateTime = (date, typeTime, typeYear, typeMonth) => {
 
 
 export const getRandomBool = () => Math.random() > 0.5;
-
-
-export const createElement = (template) => {
-  const newElement = document.createElement(`div`);
-  newElement.innerHTML = template;
-
-  return newElement.firstChild;
-};
-
-
-export const render = (container, element, position = RenderPosition.BEFOREEND) => {
-  switch (position) {
-    case RenderPosition.AFTERBEGIN:
-      container.prepend(element);
-      break;
-    case RenderPosition.BEFOREEND:
-      container.append(element);
-      break;
-  }
-};
-
