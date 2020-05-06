@@ -84,7 +84,7 @@ export default class PageController {
   render(cards) {
     const boardFilmsComponent = this._container;
     const filmListElement = boardFilmsComponent.getElement().querySelector(`.films-list`);
-    const filmListExtrasList = boardFilmsComponent.getElement().querySelectorAll(`.films-list--extra`);
+    const filmListExtrasList = boardFilmsComponent.getElement().querySelectorAll(`.films-list--extra `);
 
     const renderShowMoreButton = () => {
       // show more button
