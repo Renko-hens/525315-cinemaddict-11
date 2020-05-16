@@ -1,11 +1,11 @@
 import RatingComponent from './components/header-profile';
 import NavigationMenuComponent from './components/navigation-menu';
-import BoardFilmsComponent from './components/board-films';
-import PageController from './controllers/board-films';
+import BoardFilmsComponent from './components/page-films';
+import PageController from './controllers/page-controller';
 import StatisticsComponent from './components/statistics-film';
 import {generateRatingCount} from './mock/header-profile';
 import {generateFilters} from './mock/filter';
-import {generateCardsFilm} from './mock/card-film';
+import {generateCardsFilm} from './mock/card';
 import {render} from './utils/render';
 
 const CARD_COUNT = 20;

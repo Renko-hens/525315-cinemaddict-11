@@ -18,7 +18,7 @@ const createSortTemplate = () => {
 export default class Sorts extends AbstractComponent {
   constructor() {
     super();
-    this._currentSortType = SortType[0];
+    this._currentSortType = SortType.DEFAULT;
   }
 
   getTemplate() {

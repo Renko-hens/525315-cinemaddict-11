@@ -27,7 +27,7 @@ const generateCardFilm = () => {
     genres: getRandomArray(genres),
     description: getRandomArray(descriptions).join(` `),
     commentsArray: generateComments(),
-    isWatchlist: getRandomBool(),
+    inWatchList: getRandomBool(),
     isWatched: getRandomBool(),
     isFavorite: getRandomBool(),
   };
