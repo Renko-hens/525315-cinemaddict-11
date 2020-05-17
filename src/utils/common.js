@@ -1,9 +1,5 @@
-import {MONTH_NAMES} from '../const';
-
-const castTimeFormat = (value) => {
-  return value < 10 ? `0${value}` : String(value);
-};
-
+import moment from "moment";
+import {WEEK} from "../const";
 
 export const getRandomIntegerNumber = (min, max) => {
   return min + Math.floor(Math.random() * (max - min));
@@ -17,7 +13,7 @@ export const getRandomArrayItem = (array) => {
 
 
 export const getRandomDate = () => {
-  const startRandomDate = new Date(1970, 0, 1);
+  const startRandomDate = new Date(2020, 4, 1);
   const endRandomDate = new Date();
   return new Date(startRandomDate.getTime() + Math.random() * (endRandomDate.getTime() - startRandomDate.getTime()));
 };
@@ -27,27 +23,38 @@ export const getRandomArray = (array) => array.slice(0, getRandomIntegerNumber(0
 
 
 export const formatTime = (date, typeTime) => {
-  const hours = castTimeFormat(date.getHours() % 12);
-  const minutes = castTimeFormat(date.getMinutes());
-  return typeTime === `letters` ? `${hours}h ${minutes}m` : `${hours}:${minutes}`;
+  let timeFormat = ``;
+
+  switch (typeTime) {
+    case `duration`:
+      if (date < 60) {
+        timeFormat = moment.utc(moment.duration(date, `minutes`).asMilliseconds()).format(`m[m]`);
+      } else {
+        timeFormat = moment.utc(moment.duration(date, `minutes`).asMilliseconds()).format(`H[h] mm[m]`);
+      }
+      break;
+
+    default:
+      timeFormat = moment.utc(moment.duration(date, `minutes`).asMilliseconds()).format(`HH:mm`);
+      break;
+  }
+
+  return timeFormat;
 };
 
 
-export const formatDate = (date, typeYear, typeMonth = `string`) => {
+export const formatDate = (date, typeYear) => {
   let dateFormat = ``;
-  const day = date.getDate();
-  const month = typeMonth === `string` ? MONTH_NAMES[date.getMonth()] : date.getMonth();
-  const year = date.getFullYear();
 
   switch (typeYear) {
     case `year`:
-      dateFormat = `${year}`;
+      dateFormat = moment(date).format(`YYYY`);
       break;
     case `divider`:
-      dateFormat = `${year}/${month}/${day}`;
+      dateFormat = moment(date).format(`YYYY/MM/DD`);
       break;
     case `normal`:
-      dateFormat = `${day} ${month} ${year}`;
+      dateFormat = moment(date).format(`DD MMMM YYYY`);
       break;
   }
 
@@ -55,10 +62,15 @@ export const formatDate = (date, typeYear, typeMonth = `string`) => {
 };
 
 
-export const formatDateTime = (date, typeTime, typeYear, typeMonth) => {
-  const time = formatTime(date, typeTime);
-  const year = formatDate(date, typeYear, typeMonth);
-  return `${year} ${time}`;
+export const formatDateTime = (date) => {
+  let fromNowDate = moment(new Date());
+  let postDate = moment(date);
+
+  if (fromNowDate.diff(postDate, `days`) > WEEK) {
+    return moment(date).format(`YYYY/MM/DD h:mm`);
+  } else {
+    return moment(date).fromNow();
+  }
 };
 
 

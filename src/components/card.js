@@ -18,7 +18,7 @@ const createCardFilmTemplate = (card) => {
       <p class="film-card__rating">${rating}</p>
       <p class="film-card__info">
         <span class="film-card__year">${formatDate(year, `year`)}</span>
-        <span class="film-card__duration">${formatTime(duration, `letters`)}</span>
+        <span class="film-card__duration">${formatTime(duration, `duration`)}</span>
         ${genres.length === 1 ? `<span class="film-card__genre">${genres}</span>` : `<span class="film-card__genres">${genres.join(`, `)}</span>`}
       </p>
       <img src="${poster}" alt="" class="film-card__poster">

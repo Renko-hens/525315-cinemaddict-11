@@ -8,19 +8,6 @@ const TEXT_COMMENT = [
   `Interesting setting and a good cast`, `Booooooooooring`, `Very very old. Meh`, `Almost two hours? Seriously?`, `Note Mate`, `it coolsa`
 ];
 
-const MONTH_NAMES = [
-  `January`,
-  `February`,
-  `March`,
-  `April`,
-  `May`,
-  `June`,
-  `July`,
-  `August`,
-  `September`,
-  `October`,
-  `November`,
-  `December`,
-];
+const WEEK = 6;
 
-export {COMMENTS_NAMES, EMOJIES, TEXT_COMMENT, MONTH_NAMES};
+export {COMMENTS_NAMES, EMOJIES, TEXT_COMMENT, WEEK};

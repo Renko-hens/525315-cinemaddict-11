@@ -84,7 +84,7 @@ export default class PageController {
   }
 
   _renderExtraCardList() {
-    const extraCardListElement = this._container.getElement().querySelectorAll(`.films-list--extra `);
+    const extraCardListElement = this._container.getElement().querySelectorAll(`.films-list--extra`);
 
     extraCardListElement
       .forEach((extraList) => {

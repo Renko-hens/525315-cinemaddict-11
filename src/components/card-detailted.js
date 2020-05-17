@@ -14,7 +14,7 @@ const createCommentTemplate = (comment) => {
         <p class="film-details__comment-text">${textComment}</p>
         <p class="film-details__comment-info">
           <span class="film-details__comment-author">${author}</span>
-          <span class="film-details__comment-day">${formatDateTime(data, `number`, `divider`, `number`)}</span>
+          <span class="film-details__comment-day">${formatDateTime(data, `humanize`, `divider`)}</span>
           <button class="film-details__comment-delete">Delete</button>
         </p>
       </div>
@@ -120,11 +120,11 @@ const createDetailedFilmTemplate = (card) => {
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Release Date</td>
-                  <td class="film-details__cell">${formatDate(year, `normal`, `string`)}</td>
+                  <td class="film-details__cell">${formatDate(year, `normal`)}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Runtime</td>
-                  <td class="film-details__cell">${formatTime(duration, `letters`)}</td>
+                  <td class="film-details__cell">${formatTime(duration, `duration`)}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Country</td>

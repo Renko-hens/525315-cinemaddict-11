@@ -23,7 +23,7 @@ const generateCardFilm = () => {
     actors: getRandomArray(actors).join(`, `),
     country: getRandomArrayItem(countries),
     year: getRandomDate(),
-    duration: getRandomDate(),
+    duration: Math.floor(Math.random() * 500),
     genres: getRandomArray(genres),
     description: getRandomArray(descriptions).join(` `),
     commentsArray: generateComments(),
