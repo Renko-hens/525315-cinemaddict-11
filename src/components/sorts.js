@@ -9,7 +9,7 @@ export const SortType = {
 const createSortTemplate = () => {
   return (
     `<ul class="sort">
-      <li><a href="#" class="sort__button sort__button--active" data-sort-type="${SortType.DEFAULT}">Sort by ${SortType.DEFAULT}</a></li>
+      <li><a href="#" class="sort__button" data-sort-type="${SortType.DEFAULT}">Sort by ${SortType.DEFAULT}</a></li>
       <li><a href="#" class="sort__button" data-sort-type="${SortType.RATING}">Sort by ${SortType.RATING}</a></li>
       <li><a href="#" class="sort__button" data-sort-type="${SortType.DATE}">Sort by ${SortType.DATE}</a></li>
     </ul>`);
