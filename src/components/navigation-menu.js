@@ -1,4 +1,11 @@
 import AbstractComponent from "./abstract-component";
+import {FilterType} from "../const";
+
+const FILTER_HREF_PREFIX = `#`;
+
+const getFilterNameByHref = (href) => {
+  return href.substring(href.lastIndexOf(FILTER_HREF_PREFIX) + 1);
+};
 
 const createFilterTemplate = (filter, isActive) => {
   const {name, count, id} = filter;
@@ -6,12 +13,12 @@ const createFilterTemplate = (filter, isActive) => {
   return (
     `<a  href="#${id}" class="main-navigation__item ${isActive ? `main-navigation__item--active` : ``}">
       ${name}
-      ${isActive ? `` : `<span class="main-navigation__item-count">${count}</span>`}
+      ${id === FilterType.ALL_MOVIES.id ? `` : `<span class="main-navigation__item-count">${count}</span>`}
     </a>`);
 };
 
 const createNavigationMenuTemplate = (filters) => {
-  const filtersMarkup = filters.map((it, i) => createFilterTemplate(it, i === 0)).join(`\n`);
+  const filtersMarkup = filters.map((it) => createFilterTemplate(it, it.checked)).join(`\n`);
 
   return (
     `<nav class="main-navigation">
@@ -30,5 +37,14 @@ export default class NavigationMenu extends AbstractComponent {
 
   getTemplate() {
     return createNavigationMenuTemplate(this._filters);
+  }
+
+  setFilterChangeHandler(handler) {
+    this.getElement().addEventListener(`click`, (evt) => {
+      if (evt.target.closest(`A`)) {
+        const filterName = getFilterNameByHref(evt.target.closest(`A`).href);
+        handler(filterName);
+      }
+    });
   }
 }

@@ -62,6 +62,12 @@ export default class CardController {
     }
   }
 
+  destroy() {
+    utils.remove(this._cardDetailtedComponent);
+    utils.remove(this._cardComponent);
+    document.removeEventListener(`keydown`, this._escKeyDownHandler);
+  }
+
   _deleteCardDetailted() {
     utils.remove(this._cardDetailtedComponent);
     this._mode = Mode.DEFAULT;

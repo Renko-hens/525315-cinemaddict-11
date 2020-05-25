@@ -13,6 +13,7 @@ const descriptions = [`Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 
 const generateCardFilm = () => {
   return {
+    id: String(new Date() + Math.random()),
     age: getRandomIntegerNumber(3, 21),
     poster: getRandomArrayItem(images),
     title: getRandomArrayItem(titleFilms),

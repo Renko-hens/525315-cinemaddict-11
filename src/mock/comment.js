@@ -6,6 +6,7 @@ const generateComments = (count = getRandomIntegerNumber(0, COMMENTS_NAMES.lengt
 
   for (let i = 0; i < count; i++) {
     comments.push({
+      id: String(new Date() + Math.random()),
       author: getRandomArrayItem(COMMENTS_NAMES),
       emoji: getRandomArrayItem(EMOJIES),
       textComment: getRandomArrayItem(TEXT_COMMENT),
