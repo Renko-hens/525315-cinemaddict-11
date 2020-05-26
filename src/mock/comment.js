@@ -10,7 +10,7 @@ const generateComments = (count = getRandomIntegerNumber(0, COMMENTS_NAMES.lengt
       author: getRandomArrayItem(COMMENTS_NAMES),
       emoji: getRandomArrayItem(EMOJIES),
       textComment: getRandomArrayItem(TEXT_COMMENT),
-      data: getRandomDate(),
+      date: getRandomDate(),
     });
   }
   return comments;

@@ -41,6 +41,8 @@ export default class NavigationMenu extends AbstractComponent {
 
   setFilterChangeHandler(handler) {
     this.getElement().addEventListener(`click`, (evt) => {
+      evt.preventDefault();
+
       if (evt.target.closest(`A`)) {
         const filterName = getFilterNameByHref(evt.target.closest(`A`).href);
         handler(filterName);

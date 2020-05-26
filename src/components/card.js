@@ -5,8 +5,8 @@ const createButtonMarkup = (name, classButton, isActive = false) => {
   return (`<button class="film-card__controls-item button film-card__controls-item--${classButton} ${isActive ? `film-card__controls-item--active` : ``}">${name}</button>`);
 };
 
-const createCardFilmTemplate = (card) => {
-  const {title, rating, year, duration, genres, poster, description, commentsArray} = card;
+const createCardFilmTemplate = (card, commentsArray) => {
+  const {title, rating, year, duration, genres, poster, description} = card;
 
   const watchListButton = createButtonMarkup(`watchlist`, `add-to-watchlist`, !card.inWatchList);
   const watchedButton = createButtonMarkup(`watched`, `mark-as-watched`, !card.isWatched);
@@ -33,13 +33,14 @@ const createCardFilmTemplate = (card) => {
 };
 
 export default class Card extends AbstractComponent {
-  constructor(card) {
+  constructor(card, comments) {
     super();
     this._card = card;
+    this._comments = comments;
   }
 
   getTemplate() {
-    return createCardFilmTemplate(this._card);
+    return createCardFilmTemplate(this._card, this._comments);
   }
 
   setClickCardHandler(handler) {

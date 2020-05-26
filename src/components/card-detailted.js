@@ -4,9 +4,9 @@ import AbstractSmartComponent from './abstract-smart-component';
 const EMOJI_SIZE = `55px`;
 
 const createCommentTemplate = (comment) => {
-  const {textComment, emoji, author, data} = comment;
+  const {textComment, emoji, author, data, id} = comment;
   return (
-    `<li class="film-details__comment">
+    `<li data-id="${id}" class="film-details__comment">
       <span class="film-details__comment-emoji">
         <img src="${emoji}" alt="emoji-smile" width="55" height="55">
       </span>
@@ -70,8 +70,8 @@ const createCheckMarkup = (name, textContent, isChecked = false) => {
      <label for="${name}" class="film-details__control-label film-details__control-label--${name}">${textContent}</label>`);
 };
 
-const createDetailedFilmTemplate = (card) => {
-  const {age, title, originalTitle, rating, director, writers, actors, year, duration, country, genres, poster, description, commentsArray} = card;
+const createDetailedFilmTemplate = (card, commentsArray) => {
+  const {age, title, originalTitle, rating, director, writers, actors, year, duration, country, genres, poster, description} = card;
 
   const watchListMarkup = createCheckMarkup(`watchlist`, `Add to watchlist`, !card.inWatchList);
   const watchedMarkup = createCheckMarkup(`watched`, `Already watched`, !card.isWatched);
@@ -159,16 +159,33 @@ const createDetailedFilmTemplate = (card) => {
 };
 
 export default class DetaltedCard extends AbstractSmartComponent {
-  constructor(card) {
+  constructor(card, comments) {
     super();
     this._card = card;
+    this._comments = comments;
     this._emoji = null;
 
     this._rerenderChangeEmoji();
   }
 
   getTemplate() {
-    return createDetailedFilmTemplate(this._card);
+    return createDetailedFilmTemplate(this._card, this._comments);
+  }
+
+  getComments() {
+    return this._card.comments;
+  }
+
+  getCommentsList() {
+    return this.getElement().querySelector(`.film-details__comments-list`);
+  }
+
+  getEmojiContainer() {
+    return this.getElement().querySelector(`.film-details__add-emoji-label`);
+  }
+
+  getCommentTextInputElement() {
+    return this.getElement().querySelector(`.film-details__comment-input`);
   }
 
   setCloseCardDetailtedHandler(handler) {
