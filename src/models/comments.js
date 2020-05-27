@@ -1,5 +1,4 @@
-import {getRandomIntegerNumber} from '../utils/common.js';
-export default class CommentsModel {
+export default class Comments {
   constructor() {
     this._comments = [];
     this._dataChangeHandlers = [];
@@ -13,18 +12,34 @@ export default class CommentsModel {
     comments.forEach((comment) => {
       this._comments.push(comment);
     });
+
     this._callHandlers(this._dataChangeHandlers);
   }
 
   addComment(comment) {
     const newComment = Object.assign({}, comment, {
-      id: getRandomIntegerNumber(100, 25000),
+      id: String(new Date() + Math.random()),
       date: new Date(),
       author: `Renko Hens`,
     });
 
     this._comments = [].concat(this._comments, newComment);
+
     this._callHandlers(this._dataChangeHandlers);
+  }
+
+  updateComment(id, comment) {
+    const index = this._comments.findIndex((it) => it.id === id);
+
+    if (index === -1) {
+      return false;
+    }
+
+    this._comments = [].concat(this._comments.slice(0, index), comment, this._comments.slice(index + 1));
+
+    this._callHandlers(this._dataChangeHandlers);
+
+    return true;
   }
 
   deleteComment(id) {

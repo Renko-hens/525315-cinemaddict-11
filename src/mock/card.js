@@ -14,6 +14,7 @@ const descriptions = [`Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 const generateCardFilm = () => {
   return {
     id: String(new Date() + Math.random()),
+    comments: generateComments(),
     age: getRandomIntegerNumber(3, 21),
     poster: getRandomArrayItem(images),
     title: getRandomArrayItem(titleFilms),
@@ -27,7 +28,6 @@ const generateCardFilm = () => {
     duration: Math.floor(Math.random() * 500),
     genres: getRandomArray(genres),
     description: getRandomArray(descriptions).join(` `),
-    commentsArray: generateComments(),
     inWatchList: getRandomBool(),
     isWatched: getRandomBool(),
     isFavorite: getRandomBool(),

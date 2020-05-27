@@ -16,6 +16,17 @@ export default class NavigationMenuController {
     this._cardsModel.setDataChangeHandler(this._dataChangeHandler);
   }
 
+  _dataChangeHandler() {
+    this.render();
+  }
+
+  _filterChangeHandler(filterType) {
+    this._cardsModel.setFilter(filterType);
+    this._activeFilterType = filterType;
+
+    this._dataChangeHandler();
+  }
+
   render() {
     const container = this._container;
     const allCards = this._cardsModel.getCardsAll();
@@ -38,16 +49,5 @@ export default class NavigationMenuController {
     } else {
       utils.render(container, this._filterComponent);
     }
-  }
-
-  _filterChangeHandler(filterType) {
-    this._cardsModel.setFilter(filterType);
-    this._activeFilterType = filterType;
-
-    this._dataChangeHandler();
-  }
-
-  _dataChangeHandler() {
-    this.render();
   }
 }

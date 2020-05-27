@@ -2,7 +2,7 @@ import CardsContainerComponent from '../components/cards-container';
 import ShowButtonComponent from '../components/show-button';
 import SortsComponent, {SortType} from '../components/sorts';
 import NoCardsComponent from '../components/no-card';
-import CardController, {Mode as CardControllerMode} from './card-controller';
+import CardController from './card-controller';
 import * as utils from "../utils/render";
 
 const SHOWING_FILM_COUNT_ON_START = 5;
@@ -121,20 +121,12 @@ export default class PageController {
     }
   }
 
+
   _dataChangeHandler(controller, oldData, newData) {
+    const isSuccess = this._cardsModel.updateCard(oldData.id, newData);
 
-    if (oldData === null) {
-      this._cardsModel.addComment(newData);
-      controller.render(newData, CardControllerMode.DETAILTED);
-    } else if (newData === null) {
-      this._cardsModel.removeComment(oldData.id);
-      this._updateCards(this._showingCardsCount);
-    } else {
-      const isSuccess = this._cardsModel.updateCard(oldData.id, newData);
-
-      if (isSuccess) {
-        controller.render(newData);
-      }
+    if (isSuccess) {
+      controller.render(newData);
     }
   }
 

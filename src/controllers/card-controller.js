@@ -22,7 +22,6 @@ export default class CardController {
     this._commentsModel = null;
 
     this._escKeyDownHandler = this._escKeyDownHandler.bind(this);
-    this._ctrlEnterKeyDownHandler = this._ctrlEnterKeyDownHandler.bind(this);
   }
 
   setDefaultView() {
@@ -39,20 +38,6 @@ export default class CardController {
     }
   }
 
-  _ctrlEnterKeyDownHandler(evt) {
-    if (evt.ctrlKey && evt.key === `Enter`) {
-      const emojiContainer = this._cardDetailtedComponent.getEmojiContainer();
-      const emojiType = emojiContainer.firstChild.src;
-      const commentText = this._cardDetailtedComponent.getCommentTextInputElement().value;
-      const comment = {
-        emoji: emojiType,
-        textComment: commentText.trim(),
-      };
-
-      this._commentsModel.addComment(comment);
-    }
-  }
-
   _deleteCardDetailted() {
     utils.remove(this._cardDetailtedComponent);
     this._mode = Mode.DEFAULT;
@@ -64,7 +49,6 @@ export default class CardController {
     this._deleteCardDetailted();
     utils.remove(this._cardComponent);
   }
-
 
   _changeFlag(card, isCheck) {
     const newCard = Object.assign({}, card);
@@ -78,6 +62,36 @@ export default class CardController {
         utils.remove(this._cardDetailtedComponent);
         document.removeEventListener(`keydown`, this._escKeyDownHandler);
       });
+
+      this._cardDetailtedComponent.setCtrlEnterKeyDownHandler((evt) => {
+        if (evt.ctrlKey && evt.key === `Enter`) {
+          const emojiContainer = this._cardDetailtedComponent.getEmojiContainer();
+          const commentContainer = this._cardDetailtedComponent.getCommentTextInputElement();
+
+          if (emojiContainer.querySelector(`img`) && commentContainer.value !== ``) {
+            const newEmojiElement = emojiContainer.querySelector(`img`).src;
+
+            const commentText = this._cardDetailtedComponent.getCommentTextInputElement().value;
+            const comment = {
+              emoji: newEmojiElement,
+              textComment: commentText.trim(),
+            };
+
+            this._commentsModel.addComment(comment);
+          }
+        }
+      });
+
+      this._cardDetailtedComponent.setDeleteCommentClickHandler((evt) => {
+        evt.preventDefault();
+
+        if (evt.target.classList.contains(`film-details__comment-delete`)) {
+          const commentItem = evt.target.closest(`.film-details__comment`);
+
+          this._commentsModel.deleteComment(commentItem.dataset.id);
+        }
+      });
+
     }
 
     component.setWatchListClickHandler((evt) => {
@@ -96,6 +110,7 @@ export default class CardController {
     });
   }
 
+
   render(card) {
     const renderCardDetailted = (evt) => {
       this._viewChangeHandler();
@@ -106,11 +121,9 @@ export default class CardController {
       if (isCurrentElement) {
         this._mode = Mode.DETAILTED;
 
-        this._setDataChangeHandlers(card, this._cardDetailtedComponent);
         utils.render(footer, this._cardDetailtedComponent, utils.RenderPosition.AFTEREND);
 
         document.addEventListener(`keydown`, this._escKeyDownHandler);
-        document.addEventListener(`keydown`, this._ctrlEnterKeyDownHandler);
       }
     };
 
@@ -121,6 +134,7 @@ export default class CardController {
       this._commentsModel = new CommentsModel();
       this._commentsModel.setComments(generateComments());
     }
+
     const comments = this._commentsModel.getComments();
 
     this._cardComponent = new CardComponent(card, comments);
@@ -128,6 +142,11 @@ export default class CardController {
 
     this._setDataChangeHandlers(card, this._cardComponent);
     this._setDataChangeHandlers(card, this._cardDetailtedComponent);
+
+    this._commentsModel.setDataChangeHandler(() => {
+      this._cardDetailtedComponent.setComments(this._commentsModel.getComments());
+      this._cardDetailtedComponent.rerender();
+    });
 
     this._cardComponent.setClickCardHandler(renderCardDetailted);
 

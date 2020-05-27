@@ -1,10 +1,9 @@
 import {formatTime, formatDate, formatDateTime} from '../utils/common';
 import AbstractSmartComponent from './abstract-smart-component';
-
 const EMOJI_SIZE = `55px`;
 
 const createCommentTemplate = (comment) => {
-  const {textComment, emoji, author, data, id} = comment;
+  const {textComment, emoji, author, date, id} = comment;
   return (
     `<li data-id="${id}" class="film-details__comment">
       <span class="film-details__comment-emoji">
@@ -14,7 +13,7 @@ const createCommentTemplate = (comment) => {
         <p class="film-details__comment-text">${textComment}</p>
         <p class="film-details__comment-info">
           <span class="film-details__comment-author">${author}</span>
-          <span class="film-details__comment-day">${formatDateTime(data, `humanize`, `divider`)}</span>
+          <span class="film-details__comment-day">${formatDateTime(date, `humanize`, `divider`)}</span>
           <button class="film-details__comment-delete">Delete</button>
         </p>
       </div>
@@ -76,6 +75,7 @@ const createDetailedFilmTemplate = (card, commentsArray) => {
   const watchListMarkup = createCheckMarkup(`watchlist`, `Add to watchlist`, !card.inWatchList);
   const watchedMarkup = createCheckMarkup(`watched`, `Already watched`, !card.isWatched);
   const favoriteMarkup = createCheckMarkup(`favorite`, `Add to favorites`, !card.isFavorite);
+
 
   const commentMarkup = createCommentsTemplate(commentsArray);
 
@@ -158,11 +158,12 @@ const createDetailedFilmTemplate = (card, commentsArray) => {
     </section>`);
 };
 
-export default class DetaltedCard extends AbstractSmartComponent {
+export default class DetailtedCard extends AbstractSmartComponent {
   constructor(card, comments) {
     super();
     this._card = card;
     this._comments = comments;
+
     this._emoji = null;
 
     this._rerenderChangeEmoji();
@@ -173,7 +174,11 @@ export default class DetaltedCard extends AbstractSmartComponent {
   }
 
   getComments() {
-    return this._card.comments;
+    return this._comments;
+  }
+
+  setComments(comments) {
+    this._comments = comments;
   }
 
   getCommentsList() {
@@ -208,11 +213,23 @@ export default class DetaltedCard extends AbstractSmartComponent {
     this._favoriteHandler = handler;
   }
 
+  setCtrlEnterKeyDownHandler(handler) {
+    this.getElement().querySelector(`.film-details__inner`).addEventListener(`keydown`, handler);
+    this._ctrlEnterKeyDownHandler = handler;
+  }
+
+  setDeleteCommentClickHandler(handler) {
+    this.getElement().querySelector(`.film-details__comments-list`).addEventListener(`click`, handler);
+    this._setDeleteCommentClickHandler = handler;
+  }
+
   recoveryListeners() {
     this.setCloseCardDetailtedHandler(this._closeButtonHandler);
     this.setWatchListClickHandler(this._watchListHandler);
     this.setWatchedClickHandler(this._watchedHandler);
     this.setFavoriteClickHandler(this._favoriteHandler);
+    this.setCtrlEnterKeyDownHandler(this._ctrlEnterKeyDownHandler);
+    this.setDeleteCommentClickHandler(this._setDeleteCommentClickHandler);
     this._rerenderChangeEmoji();
   }
 

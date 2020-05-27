@@ -12,7 +12,7 @@ export const getRandomArrayItem = (array) => {
 
 
 export const getRandomDate = () => {
-  const startRandomDate = new Date(2020, 4, 1);
+  const startRandomDate = new Date(2020, 2, 1);
   const endRandomDate = new Date();
   return new Date(startRandomDate.getTime() + Math.random() * (endRandomDate.getTime() - startRandomDate.getTime()));
 };
