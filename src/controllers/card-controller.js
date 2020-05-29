@@ -3,6 +3,7 @@ import DetaltedCardComponent from '../components/card-detailted';
 import * as utils from "../utils/render";
 import CommentsModel from "../models/comments";
 import {generateComments} from '../mock/comment.js';
+import {encode} from "he";
 
 export const Mode = {
   DEFAULT: `default`,
@@ -41,7 +42,6 @@ export default class CardController {
   _deleteCardDetailted() {
     utils.remove(this._cardDetailtedComponent);
     this._mode = Mode.DEFAULT;
-    // this._commentsModel = null;
     document.removeEventListener(`keydown`, this._escKeyDownHandler);
   }
 
@@ -96,7 +96,7 @@ export default class CardController {
             const commentText = component.getCommentTextInputElement().value;
             const comment = {
               emoji: newEmojiElement,
-              textComment: commentText.trim(),
+              textComment: encode(commentText.trim()),
             };
 
             this._commentsModel.addComment(comment);

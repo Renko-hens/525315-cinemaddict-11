@@ -1,9 +1,12 @@
 import {formatTime, formatDate, formatDateTime} from '../utils/common';
 import AbstractSmartComponent from './abstract-smart-component';
+
+
 const EMOJI_SIZE = `55px`;
 
 const createCommentTemplate = (comment) => {
   const {textComment, emoji, author, date, id} = comment;
+
   return (
     `<li data-id="${id}" class="film-details__comment">
       <span class="film-details__comment-emoji">
@@ -22,7 +25,6 @@ const createCommentTemplate = (comment) => {
 
 const createCommentsTemplate = (commentsArray) => {
   const commentMarkup = commentsArray.map((it) => createCommentTemplate(it)).join(`\n`);
-
   return (
     `<section class="film-details__comments-wrap">
       <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${commentsArray.length}</span></h3>
