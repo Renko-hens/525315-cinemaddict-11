@@ -41,7 +41,7 @@ export default class CardController {
   _deleteCardDetailted() {
     utils.remove(this._cardDetailtedComponent);
     this._mode = Mode.DEFAULT;
-    this._commentsModel = null;
+    // this._commentsModel = null;
     document.removeEventListener(`keydown`, this._escKeyDownHandler);
   }
 
@@ -56,43 +56,13 @@ export default class CardController {
     this._dataChangeHandler(this, card, newCard);
   }
 
+  _changeComment(card, newComments) {
+    const newCard = Object.assign({}, card);
+    newCard.comments = newComments;
+    this._dataChangeHandler(this, card, newCard);
+  }
+
   _setDataChangeHandlers(card, component) {
-    if (component === this._cardDetailtedComponent) {
-      this._cardDetailtedComponent.setCloseCardDetailtedHandler(() => {
-        utils.remove(this._cardDetailtedComponent);
-        document.removeEventListener(`keydown`, this._escKeyDownHandler);
-      });
-
-      this._cardDetailtedComponent.setCtrlEnterKeyDownHandler((evt) => {
-        if (evt.ctrlKey && evt.key === `Enter`) {
-          const emojiContainer = this._cardDetailtedComponent.getEmojiContainer();
-          const commentContainer = this._cardDetailtedComponent.getCommentTextInputElement();
-
-          if (emojiContainer.querySelector(`img`) && commentContainer.value !== ``) {
-            const newEmojiElement = emojiContainer.querySelector(`img`).src;
-
-            const commentText = this._cardDetailtedComponent.getCommentTextInputElement().value;
-            const comment = {
-              emoji: newEmojiElement,
-              textComment: commentText.trim(),
-            };
-
-            this._commentsModel.addComment(comment);
-          }
-        }
-      });
-
-      this._cardDetailtedComponent.setDeleteCommentClickHandler((evt) => {
-        evt.preventDefault();
-
-        if (evt.target.classList.contains(`film-details__comment-delete`)) {
-          const commentItem = evt.target.closest(`.film-details__comment`);
-
-          this._commentsModel.deleteComment(commentItem.dataset.id);
-        }
-      });
-
-    }
 
     component.setWatchListClickHandler((evt) => {
       evt.preventDefault();
@@ -108,19 +78,56 @@ export default class CardController {
       evt.preventDefault();
       this._changeFlag(card, `isFavorite`);
     });
-  }
 
+    if (component === this._cardDetailtedComponent) {
+      component.setCloseCardDetailtedHandler(() => {
+        this._deleteCardDetailted();
+        document.removeEventListener(`keydown`, this._escKeyDownHandler);
+      });
+
+      component.setCtrlEnterKeyDownHandler((evt) => {
+        if (evt.ctrlKey && evt.key === `Enter`) {
+          const emojiContainer = component.getEmojiContainer();
+          const commentContainer = component.getCommentTextInputElement();
+
+          if (emojiContainer.querySelector(`img`) && commentContainer.value !== ``) {
+            const newEmojiElement = emojiContainer.querySelector(`img`).src;
+
+            const commentText = component.getCommentTextInputElement().value;
+            const comment = {
+              emoji: newEmojiElement,
+              textComment: commentText.trim(),
+            };
+
+            this._commentsModel.addComment(comment);
+            this._changeComment(card, this._commentsModel.getComments());
+          }
+        }
+      });
+
+      component.setDeleteCommentClickHandler((evt) => {
+        evt.preventDefault();
+
+        if (evt.target.classList.contains(`film-details__comment-delete`)) {
+          const commentItem = evt.target.closest(`.film-details__comment`);
+          this._commentsModel.deleteComment(commentItem.dataset.id);
+          this._changeComment(card, this._commentsModel.getComments());
+        }
+      });
+    }
+  }
 
   render(card) {
     const renderCardDetailted = (evt) => {
       this._viewChangeHandler();
-
       const isCurrentElement = evt.target.className === `film-card__poster` || evt.target.className === `film-card__title` || evt.target.className === `film-card__comments`;
       const footer = document.querySelector(`.footer`);
 
       if (isCurrentElement) {
         this._mode = Mode.DETAILTED;
 
+        this._cardDetailtedComponent.recoveryListeners();
+        this._setDataChangeHandlers(card, this._cardDetailtedComponent);
         utils.render(footer, this._cardDetailtedComponent, utils.RenderPosition.AFTEREND);
 
         document.addEventListener(`keydown`, this._escKeyDownHandler);
@@ -138,9 +145,9 @@ export default class CardController {
     const comments = this._commentsModel.getComments();
 
     this._cardComponent = new CardComponent(card, comments);
-    this._cardDetailtedComponent = new DetaltedCardComponent(card, comments);
-
     this._setDataChangeHandlers(card, this._cardComponent);
+
+    this._cardDetailtedComponent = new DetaltedCardComponent(card, comments);
     this._setDataChangeHandlers(card, this._cardDetailtedComponent);
 
     this._commentsModel.setDataChangeHandler(() => {

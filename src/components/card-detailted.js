@@ -173,9 +173,9 @@ export default class DetailtedCard extends AbstractSmartComponent {
     return createDetailedFilmTemplate(this._card, this._comments);
   }
 
-  getComments() {
-    return this._comments;
-  }
+  // getComments() {
+  //   return this._comments;
+  // }
 
   setComments(comments) {
     this._comments = comments;

@@ -1,6 +1,6 @@
 import RatingComponent from './components/header-profile';
 import NavigationMenuController from './controllers/navigation-menu';
-import BoardFilmsComponent from './components/page-films';
+import PageFilmsComponent from './components/page-films';
 import PageController from './controllers/page-controller';
 import StatisticsComponent from './components/statistics-film';
 import CardsModel from './models/cards';
@@ -25,10 +25,10 @@ cardsModel.setCards(cards);
 const navigationMenuController = new NavigationMenuController(main, cardsModel);
 navigationMenuController.render();
 
-const boardFilmsComponent = new BoardFilmsComponent();
-render(main, boardFilmsComponent);
+const pageFilmsComponent = new PageFilmsComponent();
+render(main, pageFilmsComponent);
 
-const boardController = new PageController(boardFilmsComponent, cardsModel);
+const boardController = new PageController(pageFilmsComponent, cardsModel);
 boardController.render(cards);
 
 const statisticsComponent = new StatisticsComponent(QUANTITY_MOVIES);
