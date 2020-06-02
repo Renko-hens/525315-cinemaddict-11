@@ -21,6 +21,7 @@ const createCommentTemplate = (comment) => {
         </div>
       </li>`);
   }
+  return false;
 };
 
 const createCommentsTemplate = (commentsArray) => {
@@ -72,7 +73,8 @@ const createCheckMarkup = (name, textContent, isChecked = false) => {
 };
 
 const createDetailedFilmTemplate = (card, commentsArray) => {
-  const {age, title, originalTitle, rating, director, writers, actors, year, duration, country, genres, poster, description, comments} = card;
+  // {comments}
+  const {age, title, originalTitle, rating, director, writers, actors, year, duration, country, genres, poster, description} = card;
 
   const watchListMarkup = createCheckMarkup(`watchlist`, `Add to watchlist`, card.inWatchList);
   const watchedMarkup = createCheckMarkup(`watched`, `Already watched`, card.isWatched);
@@ -87,7 +89,7 @@ const createDetailedFilmTemplate = (card, commentsArray) => {
   //   return commentsArray[commentId];
   // });
 
-  const commentMarkup = createCommentsTemplate(commentsArray  );
+  const commentMarkup = createCommentsTemplate(commentsArray);
 
   return (
     `<section class="film-details">

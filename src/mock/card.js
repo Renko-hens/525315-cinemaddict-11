@@ -1,5 +1,4 @@
 import {getRandomIntegerNumber, getRandomArray, getRandomArrayItem, getRandomDate, getRandomBool} from '../utils/common';
-import {generateComments} from './comment';
 
 const DEFAULT_COUNT = 2;
 const images = [`./images/posters/popeye-meets-sinbad.png`, `./images/posters/made-for-each-other.png`, `./images/posters/popeye-meets-sinbad.png`, `./images/posters/the-dance-of-life.jpg`, `./images/posters/the-great-flamarion.jpg`];
