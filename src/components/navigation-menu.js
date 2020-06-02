@@ -3,6 +3,10 @@ import {FilterType} from "../const";
 
 const FILTER_HREF_PREFIX = `#`;
 
+export const MenuItem = {
+  STATISTICS: `stats`,
+};
+
 const getFilterNameByHref = (href) => {
   return href.substring(href.lastIndexOf(FILTER_HREF_PREFIX) + 1);
 };
@@ -40,6 +44,17 @@ export default class NavigationMenu extends AbstractComponent {
   }
 
   setFilterChangeHandler(handler) {
+    this.getElement().querySelector(`.main-navigation__items`).addEventListener(`click`, (evt) => {
+      evt.preventDefault();
+
+      if (evt.target.closest(`A`)) {
+        const filterName = getFilterNameByHref(evt.target.closest(`A`).href);
+        handler(filterName);
+      }
+    });
+  }
+
+  setTabChangeHandler(handler) {
     this.getElement().addEventListener(`click`, (evt) => {
       evt.preventDefault();
 

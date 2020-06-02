@@ -10,6 +10,19 @@ export const getRandomArrayItem = (array) => {
   return array[randomIndex];
 };
 
+export const checkRating = (ratingValue) => {
+  let ratingType = ``;
+
+  if (ratingValue > 0 && ratingValue < 11) {
+    ratingType = `Novice`;
+  } else if (ratingValue < 21) {
+    ratingType = `Fan`;
+  } else if (ratingValue >= 21) {
+    ratingType = `Movie buff`;
+  }
+
+  return ratingType;
+};
 
 export const getRandomDate = () => {
   const startRandomDate = new Date(2020, 2, 1);
@@ -17,9 +30,7 @@ export const getRandomDate = () => {
   return new Date(startRandomDate.getTime() + Math.random() * (endRandomDate.getTime() - startRandomDate.getTime()));
 };
 
-
 export const getRandomArray = (array) => array.slice(0, getRandomIntegerNumber(0, array.length) + 1);
-
 
 export const formatTime = (date, typeTime) => {
   let timeFormat = ``;
@@ -33,6 +44,14 @@ export const formatTime = (date, typeTime) => {
       }
       break;
 
+    case `hours`:
+      timeFormat = moment.utc(moment.duration(date, `minutes`).asMilliseconds()).format(`HH`);
+      break;
+
+    case `minutes`:
+      timeFormat = moment.utc(moment.duration(date, `minutes`).asMilliseconds()).format(`mm`);
+      break;
+
     default:
       timeFormat = moment.utc(moment.duration(date, `minutes`).asMilliseconds()).format(`HH:mm`);
       break;
@@ -40,7 +59,6 @@ export const formatTime = (date, typeTime) => {
 
   return timeFormat;
 };
-
 
 export const formatDate = (date, typeYear) => {
   let dateFormat = ``;
@@ -72,5 +90,10 @@ export const formatDateTime = (date) => {
   }
 };
 
+// export const isOneDay = (dateA, dateB) => {
+//   const a = moment(dateA);
+//   const b = moment(dateB);
+//   return a.diff(b, `days`) === 0 && dateA.getDate() === dateB.getDate();
+// };
 
 export const getRandomBool = () => Math.random() > 0.5;

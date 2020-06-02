@@ -27,6 +27,14 @@ export const FilterType = {
   },
 };
 
+export const StatMenuTypes = {
+  ALL_TIME: `all-time`,
+  TODAY: `today`,
+  WEEK: `week`,
+  MONTH: `month`,
+  YEAR: `year`
+};
+
 const WEEK = 6;
 
 export {COMMENTS_NAMES, EMOJIES, TEXT_COMMENT, WEEK};

@@ -4,7 +4,7 @@ const createFilmStatistics = (quantity) => {
   return (`<p>${quantity} movies inside</p>`);
 };
 
-export default class Statistics extends AbstractComponent {
+export default class QuantityFilm extends AbstractComponent {
   constructor(quantity) {
     super();
     this._quantity = quantity;

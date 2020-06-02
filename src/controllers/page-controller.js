@@ -148,6 +148,14 @@ export default class PageController {
     this._renderShowMoreButton();
   }
 
+  hide() {
+    this._container.hide();
+  }
+
+  show() {
+    this._container.show();
+  }
+
   render() {
     const cards = this._cardsModel.getCards();
     const container = this._container;

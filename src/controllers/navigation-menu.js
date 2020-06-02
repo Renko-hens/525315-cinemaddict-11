@@ -3,6 +3,10 @@ import * as utils from "../utils/render.js";
 import {FilterType} from "../const.js";
 import {getCardsByFilter} from "../utils/navigation-menu";
 
+export const MenuItem = {
+  STATISTICS: `stats`,
+};
+
 export default class NavigationMenuController {
   constructor(container, cardsModel) {
     this._container = container;
@@ -12,12 +16,23 @@ export default class NavigationMenuController {
 
     this._dataChangeHandler = this._dataChangeHandler.bind(this);
     this._filterChangeHandler = this._filterChangeHandler.bind(this);
+    this._tabChangeHandler = this._tabChangeHandler.bind(this);
 
     this._cardsModel.setDataChangeHandler(this._dataChangeHandler);
+
+    this._tabChangeHandlers = [];
   }
 
   _dataChangeHandler() {
     this.render();
+  }
+
+  setTabChangeHandler(handler) {
+    this._tabChangeHandlers.push(handler);
+  }
+
+  _tabChangeHandler(tabItem) {
+    this._tabChangeHandlers.forEach((cb) => cb(tabItem));
   }
 
   _filterChangeHandler(filterType) {
@@ -43,6 +58,7 @@ export default class NavigationMenuController {
 
     this._filterComponent = new NavigationMenuComponent(filters);
     this._filterComponent.setFilterChangeHandler(this._filterChangeHandler);
+    this._filterComponent.setTabChangeHandler(this._tabChangeHandler);
 
     if (oldComponent) {
       utils.replace(this._filterComponent, oldComponent);

@@ -1,26 +1,26 @@
 import {formatTime, formatDate, formatDateTime} from '../utils/common';
 import AbstractSmartComponent from './abstract-smart-component';
 
-
 const EMOJI_SIZE = `55px`;
 
 const createCommentTemplate = (comment) => {
-  const {textComment, emoji, author, date, id} = comment;
-
-  return (
-    `<li data-id="${id}" class="film-details__comment">
-      <span class="film-details__comment-emoji">
-        <img src="${emoji}" alt="emoji-smile" width="55" height="55">
-      </span>
-      <div>
-        <p class="film-details__comment-text">${textComment}</p>
-        <p class="film-details__comment-info">
-          <span class="film-details__comment-author">${author}</span>
-          <span class="film-details__comment-day">${formatDateTime(date, `humanize`, `divider`)}</span>
-          <button class="film-details__comment-delete">Delete</button>
-        </p>
-      </div>
-    </li>`);
+  if (comment !== undefined) {
+    const {textComment, emoji, author, date, id} = comment;
+    return (
+      `<li data-id="${id}" class="film-details__comment">
+        <span class="film-details__comment-emoji">
+          <img src="${emoji}" alt="emoji-smile" width="55" height="55">
+        </span>
+        <div>
+          <p class="film-details__comment-text">${textComment}</p>
+          <p class="film-details__comment-info">
+            <span class="film-details__comment-author">${author}</span>
+            <span class="film-details__comment-day">${formatDateTime(date, `humanize`, `divider`)}</span>
+            <button class="film-details__comment-delete">Delete</button>
+          </p>
+        </div>
+      </li>`);
+  }
 };
 
 const createCommentsTemplate = (commentsArray) => {
@@ -72,14 +72,22 @@ const createCheckMarkup = (name, textContent, isChecked = false) => {
 };
 
 const createDetailedFilmTemplate = (card, commentsArray) => {
-  const {age, title, originalTitle, rating, director, writers, actors, year, duration, country, genres, poster, description} = card;
+  const {age, title, originalTitle, rating, director, writers, actors, year, duration, country, genres, poster, description, comments} = card;
 
-  const watchListMarkup = createCheckMarkup(`watchlist`, `Add to watchlist`, !card.inWatchList);
-  const watchedMarkup = createCheckMarkup(`watched`, `Already watched`, !card.isWatched);
-  const favoriteMarkup = createCheckMarkup(`favorite`, `Add to favorites`, !card.isFavorite);
+  const watchListMarkup = createCheckMarkup(`watchlist`, `Add to watchlist`, card.inWatchList);
+  const watchedMarkup = createCheckMarkup(`watched`, `Already watched`, card.isWatched);
+  const favoriteMarkup = createCheckMarkup(`favorite`, `Add to favorites`, card.isFavorite);
 
+  // const commentIds = comments;
 
-  const commentMarkup = createCommentsTemplate(commentsArray);
+  // const postComments = commentIds.map((commentId) => {
+  //   console.log(commentsArray);
+  //   console.log(commentId);
+  //   console.log(commentsArray[commentId]);
+  //   return commentsArray[commentId];
+  // });
+
+  const commentMarkup = createCommentsTemplate(commentsArray  );
 
   return (
     `<section class="film-details">

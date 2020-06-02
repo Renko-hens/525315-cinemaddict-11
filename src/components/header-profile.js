@@ -1,15 +1,8 @@
 import AbstractComponent from "./abstract-component";
+import {checkRating} from "../utils/common";
 
 const createHeaderProfileTemplate = (ratingValue) => {
-  let rating = ``;
-
-  if (ratingValue > 0 && ratingValue < 11) {
-    rating = `Novice`;
-  } else if (ratingValue < 21) {
-    rating = `Fan`;
-  } else if (ratingValue >= 21) {
-    rating = `Movie buff`;
-  }
+  let rating = checkRating(ratingValue);
 
   return (
     `<section class="header__profile profile">
